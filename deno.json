@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "npm:preact"
+  },
+  "imports": {
+    "denoland/": "https://deno.land/x/",
+    "preact": "npm:preact",
+    "preact/": "npm:/preact/",
+    "@preact/signals": "npm:@preact/signals",
+    "utils/": "./src/utils/"
+  },
+  "lock": false,
+  "tasks": {
+    "dev": "deno run -A --watch ./src/main.ts"
+  },
+  "unstable": ["kv"]
+}

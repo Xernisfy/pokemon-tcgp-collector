@@ -1,0 +1,245 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+button {
+  color: inherit;
+}
+button, [role="button"] {
+  cursor: pointer;
+}
+code {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
+  font-size: 1em;
+}
+img,
+svg {
+  display: block;
+}
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f4f4f9;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-right: 1rem;
+}
+
+.filter {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  color: #333;
+  appearance: none;
+  transition: all 0.2s;
+  margin-right: 1rem;
+}
+
+.flex > .setName {
+  flex-basis: 100px;
+  flex-grow: 0;
+  text-align: center;
+  align-content: center;
+}
+
+.pack {
+  margin-top: 8px;
+}
+
+.progressBar {
+  height: 22px;
+  border-radius: 8px;
+  border-width: 0px 1px 1px 0px;
+  border-color: black;
+  border-style: solid;
+  overflow: hidden;
+}
+
+.progressBar > div {
+  height: 100%;
+  border-radius: inherit;
+  background: fuchsia;
+  text-align: center;
+}
+
+.progressBar:not(.secret) > div {
+  filter: saturate(80%);
+}
+
+.progressBar[data-color="set-A1"] > div {
+  background: hsl(270, 100%, 50%);
+}
+
+.progressBar[data-color="pack-mewtwo"] > div {
+  background: hsl(280, 100%, 50%);
+}
+
+.progressBar[data-color="pack-pikachu"] > div {
+  background: hsl(50, 100%, 50%);
+}
+
+.progressBar[data-color="pack-charizard"] > div {
+  background: hsl(20, 100%, 50%);
+}
+
+.progressBar[data-color="set-A1a"] > div {
+  background: hsl(150, 100%, 50%);
+}
+
+.progressBar[data-color="set-A2"] > div {
+  background: hsl(280, 100%, 50%);
+}
+
+.progressBar[data-color="pack-dialga"] > div {
+  background: hsl(220, 100%, 50%);
+}
+
+.progressBar[data-color="pack-palkia"] > div {
+  background: hsl(290, 100%, 50%);
+}
+
+.progressBar[data-color="set-PROMO-A"] > div {
+  background: hsl(0, 0%, 50%);
+}
+
+.progressBar[data-color="pack-rest"] > div {
+  background: hsl(0, 0%, 50%);
+}
+
+#cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .cardImage {
+  width: 100%;
+  height: auto;
+}
+
+.card .packImage {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 40%;
+}
+
+.counter {
+  width: 40%;
+  background: #575757;
+  border-radius: 0px 8px 0px 0px;
+  color: white;
+  font-weight: bold;
+  font-size: medium;
+  position: absolute;
+  bottom: 0px;
+}
+
+.index {
+  width: 40%;
+  background: #e0e0e0;
+  border-radius: 8px 0px 0px 0px;
+  font-weight: bold;
+  font-size: medium;
+  font-style: italic;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex > * {
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+}
