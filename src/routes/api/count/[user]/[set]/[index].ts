@@ -1,5 +1,6 @@
 import { Handlers } from "denoland/fresh/server.ts";
 import { db, Prefix } from "utils/kv.ts";
+import { duplicates } from "utils/sets.ts";
 
 export const handler: Handlers = {
   async PUT(req, ctx) {
@@ -12,6 +13,13 @@ export const handler: Handlers = {
     } else {
       db.set([Prefix.count, user, set, index], amount);
     }
+    duplicates[`${set}/${index}`]?.others.forEach(({ index, set }) => {
+      if (amount === 0) {
+        db.delete([Prefix.count, user, set, index]);
+      } else {
+        db.set([Prefix.count, user, set, index], amount);
+      }
+    });
     return new Response();
   },
 };

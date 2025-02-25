@@ -14,7 +14,7 @@ function ProgressBar(props: ProgressBarProps) {
   const [sc, sm] = props.distr.secret;
   return (
     <div>
-      <div class="progressBar" data-color={props.color}>
+      <div class="progress-bar" data-color={props.color}>
         <div
           style={`width: ${nc / nm * 100}%;`}
         >
@@ -22,7 +22,7 @@ function ProgressBar(props: ProgressBarProps) {
         </div>
       </div>
       <div
-        class="progressBar secret"
+        class="progress-bar secret"
         data-color={props.color}
         hidden={sm === 0}
       >
@@ -94,7 +94,7 @@ export function PackProgress() {
             ? "hidden"
             : "flex"}
         >
-          <span class="setName">{set.id}</span>
+          <span class="set-name">{set.id}</span>
           <div class="flex pack" style="flex-direction: column;">
             <ProgressBar distr={cardsPerPack[set.id]} color={"set-" + set.id} />
             <div class="flex">

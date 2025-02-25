@@ -30,3 +30,27 @@ export const sets = [
     packs: [],
   },
 ] as const satisfies Set[];
+
+const duplicateList = [
+  ["A1/217", "A1a/62"],
+];
+
+export const duplicates: Record<
+  string,
+  { latest: boolean; others: { set: string; index: number }[] }
+> = {};
+duplicateList.forEach((d) =>
+  d.forEach((id, i) =>
+    duplicates[id] = {
+      latest: i === d.length - 1,
+      others: d.filter((j) => id !== j).map((j) => {
+        const [set, index] = j.split("/");
+        return { set, index: +index };
+      }),
+    }
+  )
+);
+
+export function isDuplicate(id: string) {
+  return duplicates[id] && duplicates[id].latest === false;
+}

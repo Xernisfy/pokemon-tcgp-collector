@@ -1,5 +1,8 @@
 export const db = await Deno.openKv(import.meta.dirname + "/db.sqlite");
-globalThis.addEventListener("unload", () => db.close());
+Deno.addSignalListener("SIGINT", () => {
+  db.close();
+  Deno.exit(0);
+});
 
 export enum Prefix {
   users = "users",

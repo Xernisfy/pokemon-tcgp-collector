@@ -1,6 +1,8 @@
 import { Handlers } from "denoland/fresh/server.ts";
 import { db, Prefix } from "utils/kv.ts";
+import { CardCount } from "../islands/cardCount.tsx";
 import { Collection } from "../islands/collection.tsx";
+import { HeaderToggle } from "../islands/headerToggle.tsx";
 import { PackProgress } from "../islands/packProgress.tsx";
 import { SelectObtained } from "../islands/selectObtained.tsx";
 import { SelectPack } from "../islands/selectPack.tsx";
@@ -36,12 +38,16 @@ export default function ({ data }: { data: PreloadData }) {
   return (
     <>
       <div id="header">
-        <SelectUser users={data.users} />
-        <SelectSet />
-        <SelectPack />
-        <SelectRarity />
-        <SelectObtained />
-        <PackProgress />
+        <div id="header-items">
+          <SelectUser users={data.users} />
+          <SelectSet />
+          <SelectPack />
+          <SelectRarity />
+          <SelectObtained />
+          <CardCount />
+          <PackProgress />
+        </div>
+        <HeaderToggle />
       </div>
       <Collection cards={data.cards} packs={data.packs} />
     </>

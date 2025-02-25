@@ -12,18 +12,6 @@ button {
 button, [role="button"] {
   cursor: pointer;
 }
-code {
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    "Courier New",
-    monospace;
-  font-size: 1em;
-}
 img,
 svg {
   display: block;
@@ -35,28 +23,8 @@ video {
 }
 
 html {
-  line-height: 1.5;
   -webkit-text-size-adjust: 100%;
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial,
-    "Noto Sans",
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji";
-}
-.transition-colors {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
@@ -71,12 +39,28 @@ body {
   top: 0;
   z-index: 1;
   background-color: #f4f4f9;
-  border-bottom: 1px solid #ddd;
   width: 100%;
-  padding: 1rem;
   background: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#header-items {
+  padding: 1rem;
+  overflow: hidden;
+  max-height: 400px;
+  transition: max-height 0.5s, padding 0.5s;
+}
+
+#header-items.collapsed {
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0px;
+}
+
+#header-toggle {
+  width: 100%;
+  border: none;
 }
 
 label {
@@ -100,7 +84,7 @@ label {
   margin-right: 1rem;
 }
 
-.flex > .setName {
+.flex > .set-name {
   flex-basis: 100px;
   flex-grow: 0;
   text-align: center;
@@ -111,7 +95,7 @@ label {
   margin-top: 8px;
 }
 
-.progressBar {
+.progress-bar {
   height: 22px;
   border-radius: 8px;
   border-width: 0px 1px 1px 0px;
@@ -120,54 +104,54 @@ label {
   overflow: hidden;
 }
 
-.progressBar > div {
+.progress-bar > div {
   height: 100%;
   border-radius: inherit;
   background: fuchsia;
   text-align: center;
 }
 
-.progressBar:not(.secret) > div {
+.progress-bar:not(.secret) > div {
   filter: saturate(80%);
 }
 
-.progressBar[data-color="set-A1"] > div {
+.progress-bar[data-color="set-A1"] > div {
   background: hsl(270, 100%, 50%);
 }
 
-.progressBar[data-color="pack-mewtwo"] > div {
+.progress-bar[data-color="pack-mewtwo"] > div {
   background: hsl(280, 100%, 50%);
 }
 
-.progressBar[data-color="pack-pikachu"] > div {
+.progress-bar[data-color="pack-pikachu"] > div {
   background: hsl(50, 100%, 50%);
 }
 
-.progressBar[data-color="pack-charizard"] > div {
+.progress-bar[data-color="pack-charizard"] > div {
   background: hsl(20, 100%, 50%);
 }
 
-.progressBar[data-color="set-A1a"] > div {
+.progress-bar[data-color="set-A1a"] > div {
   background: hsl(150, 100%, 50%);
 }
 
-.progressBar[data-color="set-A2"] > div {
+.progress-bar[data-color="set-A2"] > div {
   background: hsl(280, 100%, 50%);
 }
 
-.progressBar[data-color="pack-dialga"] > div {
+.progress-bar[data-color="pack-dialga"] > div {
   background: hsl(220, 100%, 50%);
 }
 
-.progressBar[data-color="pack-palkia"] > div {
+.progress-bar[data-color="pack-palkia"] > div {
   background: hsl(290, 100%, 50%);
 }
 
-.progressBar[data-color="set-PROMO-A"] > div {
+.progress-bar[data-color="set-PROMO-A"] > div {
   background: hsl(0, 0%, 50%);
 }
 
-.progressBar[data-color="pack-rest"] > div {
+.progress-bar[data-color="pack-rest"] > div {
   background: hsl(0, 0%, 50%);
 }
 
@@ -193,12 +177,12 @@ label {
   transform: translateY(-5px);
 }
 
-.card .cardImage {
+.card .card-image {
   width: 100%;
   height: auto;
 }
 
-.card .packImage {
+.card .pack-image {
   position: absolute;
   right: 0px;
   top: 0px;

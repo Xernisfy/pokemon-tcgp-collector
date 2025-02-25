@@ -1,4 +1,4 @@
-import { sets } from "utils/sets.ts";
+import { isDuplicate, sets } from "utils/sets.ts";
 import {
   filterObtained,
   filterPack,
@@ -17,11 +17,12 @@ interface CardProps {
 }
 
 export function Card(props: CardProps) {
-  const userCardsKey = `${user.value}/${props.setId}/${props.index}`;
+  const key = props.setId + "/" + props.index;
+  const userCardsKey = user.value + "/" + key;
   const currentCount = userCards.value[userCardsKey] || 0;
-  const currentPack = packs.value[`${props.setId}/${props.index}`];
+  const currentPack = packs.value[key];
   function update() {
-    fetch(`/api/count/${user.value}/${props.setId}/${props.index}`, {
+    fetch(`/api/count/${user.value}/${key}`, {
       method: "PUT",
       body: userCards.value[userCardsKey].toString(),
     });
@@ -30,6 +31,7 @@ export function Card(props: CardProps) {
     if (filterSet.value !== "all" && filterSet.value !== props.setId) {
       return true;
     }
+    if (/*filterSet.value === 'all' &&*/ isDuplicate(key)) return true;
     if (filterPack.value !== "all" && filterPack.value !== currentPack) {
       return true;
     }
@@ -45,8 +47,7 @@ export function Card(props: CardProps) {
     if (filterObtained.value === "unobtained" && currentCount > 0) return true;
     if (filterObtained.value === "tradable") {
       const tradeUser = user.value === "Hase" ? "Bär" : "Hase";
-      const tradeCount =
-        userCards.value[`${tradeUser}/${props.setId}/${props.index}`] || 0;
+      const tradeCount = userCards.value[tradeUser + "/" + key] || 0;
       if (currentCount === 0 && tradeCount === 0) return true;
       if (currentCount === 1 || tradeCount === 1) return true;
       if (currentCount > 0 && tradeCount > 0) return true;
@@ -72,12 +73,13 @@ export function Card(props: CardProps) {
         };
         update();
       }}
+      data-id={key}
     >
       <img
-        class="cardImage"
+        class="card-image"
         style={`filter: ${currentCount > 0 ? "none" : "grayscale(100%)"};`}
         loading="lazy"
-        src={`/api/image/${props.setId}/${props.index}`}
+        src={`/api/image/${key}`}
       />{" "}
       <div class="counter">{currentCount}</div>{" "}
       <div class="index">{(props.index + 1).toString().padStart(3, "0")}</div>

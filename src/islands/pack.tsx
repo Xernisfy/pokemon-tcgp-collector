@@ -7,7 +7,7 @@ export function Pack(props: PackProps) {
   if (!props.name) return null;
   return (
     <img
-      class="packImage"
+      class="pack-image"
       src={`/api/image?path=${props.setLink}/${props.name}.png`}
     />
   );
