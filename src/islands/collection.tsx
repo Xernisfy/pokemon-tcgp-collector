@@ -4,7 +4,7 @@ import { Card } from "./card.tsx";
 
 interface CollectionProps {
   cards: Record<string, number>;
-  packs: Record<string, string>
+  packs: Record<string, string>;
 }
 
 export function Collection(props: CollectionProps) {
@@ -23,7 +23,14 @@ export function Collection(props: CollectionProps) {
         return p;
       }, [] as { index: number; setId: string; setLink: string }[]).map((
         { index, setId, setLink },
-      ) => <Card index={index} setId={setId} setLink={setLink} />)}
+      ) => (
+        <Card
+          key={setId + "/" + index}
+          index={index}
+          setId={setId}
+          setLink={setLink}
+        />
+      ))}
     </div>
   );
 }

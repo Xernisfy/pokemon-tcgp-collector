@@ -13,8 +13,9 @@ export function SelectRarity() {
         onInput={(e) => filterRarity.value = e.currentTarget.value as Rarity}
       >
         <option value="all">Alle</option>
-        {rarities.map(([option, text]) => <option value={option}>{text}
-        </option>)}
+        {rarities.map(([option, text]) => (
+          <option key={option} value={option}>{text}</option>
+        ))}
       </select>
     </>
   );

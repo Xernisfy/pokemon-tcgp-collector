@@ -43,6 +43,14 @@ export function Card(props: CardProps) {
     ) return true;
     if (filterObtained.value === "obtained" && currentCount === 0) return true;
     if (filterObtained.value === "unobtained" && currentCount > 0) return true;
+    if (filterObtained.value === "tradable") {
+      const tradeUser = user.value === "Hase" ? "Bär" : "Hase";
+      const tradeCount =
+        userCards.value[`${tradeUser}/${props.setId}/${props.index}`] || 0;
+      if (currentCount === 0 && tradeCount === 0) return true;
+      if (currentCount === 1 || tradeCount === 1) return true;
+      if (currentCount > 0 && tradeCount > 0) return true;
+    }
     return false;
   }
   return (

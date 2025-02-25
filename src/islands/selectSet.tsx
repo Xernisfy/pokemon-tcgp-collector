@@ -15,7 +15,8 @@ export function SelectSet() {
         }}
       >
         <option value="all">Alle</option>
-        {sets.map(({ id, name }) => <option value={id}>{name}</option>)}
+        {sets.map(({ id, name }) => <option key={id} value={id}>{name}
+        </option>)}
       </select>
     </>
   );

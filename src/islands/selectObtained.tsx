@@ -13,10 +13,14 @@ export function SelectObtained() {
         class="filter"
         value={filterObtained.value}
         onInput={(e) =>
-          filterObtained.value = e.currentTarget.value as typeof values[number][0]}
+          filterObtained.value = e.currentTarget
+            .value as typeof values[number][0]}
       >
         <option value="all">Alle</option>
-        {values.map(([option, text]) => <option value={option}>{text}</option>)}
+        {values.map(([option, text]) => (
+          <option key={option} value={option}>{text}</option>
+        ))}
+        <option value="tradable">Tauschbar</option>
       </select>
     </>
   );

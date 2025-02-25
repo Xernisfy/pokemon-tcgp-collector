@@ -4,7 +4,7 @@ interface PackProps {
 }
 
 export function Pack(props: PackProps) {
-  if (!props.name) return <></>;
+  if (!props.name) return null;
   return (
     <img
       class="packImage"

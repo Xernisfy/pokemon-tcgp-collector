@@ -15,7 +15,9 @@ export function SelectUser(props: SelectUserProps) {
       value={user.value}
       onInput={(e) => user.value = e.currentTarget.value}
     >
-      {props.users.map((option) => <option value={option}>{option}</option>)}
+      {props.users.map((option) => (
+        <option key={option} value={option}>{option}</option>
+      ))}
     </select>
   );
 }

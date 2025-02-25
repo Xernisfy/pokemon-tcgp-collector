@@ -10,4 +10,6 @@ export const packs = signal<Record<string, string>>({});
 export const filterSet = signal<SetId | "all">("all");
 export const filterPack = signal<PackName | "all">("all");
 export const filterRarity = signal<Rarity | "all">("all");
-export const filterObtained = signal<"obtained" | "unobtained" | "all">("all");
+export const filterObtained = signal<
+  "obtained" | "unobtained" | "tradable" | "all"
+>("all");

@@ -11,10 +11,13 @@ export function SelectPack() {
         class="filter"
         disabled={!currentSet?.packs.length}
         value={filterPack.value}
-        onInput={(e) => filterPack.value = e.currentTarget.value as PackName | "all"}
+        onInput={(e) =>
+          filterPack.value = e.currentTarget.value as PackName | "all"}
       >
         <option value="all">Alle</option>
-        {currentSet?.packs.map((name) => <option value={name}>{name}</option>)}
+        {currentSet?.packs.map((name) => (
+          <option key={name} value={name}>{name}</option>
+        ))}
       </select>
     </>
   );
