@@ -12,3 +12,5 @@ export type Set = {
 export type SetId = typeof sets[number]["id"];
 export type PackName = typeof sets[number]["packs"][number];
 export type Rarity = typeof rarities[number][0];
+
+export type DbExport = Record<string, { key: Deno.KvKey; value: unknown }[]>;

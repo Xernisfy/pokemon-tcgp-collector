@@ -1,6 +1,7 @@
 import { Handlers } from "denoland/fresh/server.ts";
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
 import { ensureDirSync, existsSync } from "jsr:@std/fs";
+import { contentTypeHeader } from "utils/contentTypeHeader.ts";
 import { sets } from "utils/sets.ts";
 
 const cacheDir = import.meta.dirname + "/../../../../../.cache/";
@@ -21,9 +22,10 @@ export const handler: Handlers = {
     const cacheSubDir = cacheDir + set + "/";
     const cacheFile = cacheSubDir + index.padStart(3, "0") + ".png";
     if (existsSync(cacheFile)) {
-      return new Response(Deno.openSync(cacheFile).readable, {
-        headers: { "Content-Type": "image/jpeg" },
-      });
+      return new Response(
+        Deno.openSync(cacheFile).readable,
+        contentTypeHeader("png"),
+      );
     }
     ensureDirSync(cacheSubDir);
     const documentSet = parseDom(

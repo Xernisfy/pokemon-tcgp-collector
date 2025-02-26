@@ -1,0 +1,210 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+button {
+  color: inherit;
+}
+
+button, [role="button"] {
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+  }
+}
+
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f4f4f9;
+  width: 100%;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  #header-items {
+    padding: 1rem;
+    overflow: hidden;
+    max-height: 400px;
+    transition: max-height 0.5s, padding 0.5s;
+    &.collapsed {
+      padding-top: 0;
+      padding-bottom: 0;
+      max-height: 0px;
+    }
+    label {
+      display: inline-block;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      margin-right: 1rem;
+    }
+    .filter {
+      display: inline-block;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      color: #333;
+      appearance: none;
+      transition: all 0.2s;
+      margin-right: 1rem;
+    }
+    #packs {
+      .set-name {
+        flex-basis: 100px;
+        flex-grow: 0;
+        text-align: center;
+        align-content: center;
+      }
+      .pack {
+        margin-top: 8px;
+        .progress-bar {
+          height: 22px;
+          border-radius: 8px;
+          border-width: 0px 1px 1px 0px;
+          border-color: black;
+          border-style: solid;
+          overflow: hidden;
+          & > div {
+            height: 100%;
+            border-radius: inherit;
+            background: fuchsia;
+            text-align: center;
+          }
+          &:not(.secret) > div {
+            filter: saturate(80%);
+          }
+          &[data-color="set-A1"] > div {
+            background: hsl(270, 100%, 50%);
+          }
+          &[data-color="pack-mewtwo"] > div {
+            background: hsl(280, 100%, 50%);
+          }
+          &[data-color="pack-pikachu"] > div {
+            background: hsl(50, 100%, 50%);
+          }
+          &[data-color="pack-charizard"] > div {
+            background: hsl(20, 100%, 50%);
+          }
+          &[data-color="set-A1a"] > div {
+            background: hsl(150, 100%, 50%);
+          }
+          &[data-color="set-A2"] > div {
+            background: hsl(280, 100%, 50%);
+          }
+          &[data-color="pack-dialga"] > div {
+            background: hsl(220, 100%, 50%);
+          }
+          &[data-color="pack-palkia"] > div {
+            background: hsl(290, 100%, 50%);
+          }
+          &[data-color="set-PROMO-A"] > div {
+            background: hsl(0, 0%, 50%);
+          }
+          &[data-color="pack-rest"] > div {
+            background: hsl(0, 0%, 50%);
+          }
+        }
+      }
+    }
+  }
+  #header-toggle {
+    width: 100%;
+    border: none;
+  }
+}
+
+#cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+    &:hover {
+      transform: translateY(-5px);
+    }
+    .card-image {
+      width: 100%;
+      height: auto;
+    }
+    .counter {
+      width: 40%;
+      background: #575757;
+      border-radius: 0px 8px 0px 0px;
+      color: white;
+      font-weight: bold;
+      font-size: medium;
+      position: absolute;
+      bottom: 0px;
+    }
+    .index {
+      width: 40%;
+      background: #e0e0e0;
+      border-radius: 8px 0px 0px 0px;
+      font-weight: bold;
+      font-size: medium;
+      font-style: italic;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+    }
+    .pack-image {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 40%;
+    }
+  }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex > * {
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+}
