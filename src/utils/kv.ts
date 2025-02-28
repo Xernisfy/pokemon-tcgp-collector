@@ -3,9 +3,15 @@ import { DbExport } from "utils/types.ts";
 export const db = await Deno.openKv(
   import.meta.dirname + "/../../db/db.sqlite",
 );
+
+let closed = false;
+addEventListener("unload", () => {
+  if (!closed) db.close();
+});
 (["SIGINT", "SIGTERM"] as Deno.Signal[]).forEach((signal) =>
   Deno.addSignalListener(signal, () => {
     db.close();
+    closed = true;
     Deno.exit(0);
   })
 );

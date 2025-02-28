@@ -5,16 +5,16 @@ import { PackName, Rarity, SetId } from "utils/types.ts";
 type RarityDistr = Record<Rarity, [number, number]>;
 
 interface ProgressBarProps {
-  color: string;
   distr: RarityDistr;
+  pack: string;
 }
 
 function ProgressBar(props: ProgressBarProps) {
   const [nc, nm] = props.distr.normal;
   const [sc, sm] = props.distr.secret;
   return (
-    <div>
-      <div class="progress-bar" data-color={props.color}>
+    <div title={props.pack}>
+      <div class="progress-bar" data-pack={props.pack}>
         <div
           style={`width: ${nc / nm * 100}%;`}
         >
@@ -23,7 +23,7 @@ function ProgressBar(props: ProgressBarProps) {
       </div>
       <div
         class="progress-bar secret"
-        data-color={props.color}
+        data-pack={props.pack}
         hidden={sm === 0}
       >
         <div
@@ -90,14 +90,11 @@ export function PackProgress() {
     <div id="packs">
       {sets.map((set) => (
         <div
-          class={filterSet.value !== "all" && filterSet.value !== set.id
-            ? "hidden"
-            : "flex"}
+          class={filterSet.value !== set.id ? "display-none" : "display-flex"}
         >
-          <span class="set-name">{set.id}</span>
-          <div class="flex pack" style="flex-direction: column;">
-            <ProgressBar distr={cardsPerPack[set.id]} color={"set-" + set.id} />
-            <div class="flex">
+          <div class="pack">
+            <ProgressBar distr={cardsPerPack[set.id]} pack={set.id} />
+            <div class="display-flex">
               {((packs) => packs.length ? [...packs, "rest" as const] : packs)(
                 set.packs,
               )
@@ -114,7 +111,7 @@ export function PackProgress() {
                   >
                     <ProgressBar
                       distr={cardsPerPack[set.id].packs[pack]}
-                      color={`pack-` + pack}
+                      pack={set.id + "-" + pack}
                     />
                   </div>
                 ))}
