@@ -23,6 +23,13 @@ export const sets = [
     packs: ["dialga", "palkia"],
   },
   {
+    id: "A2a",
+    cards: { normal: 75, secret: 21 },
+    link: "triumphantlight",
+    name: "Licht des Triumphs",
+    packs: [],
+  },
+  {
     id: "PROMO-A",
     cards: { normal: 41, secret: 0 },
     link: "promo-a",

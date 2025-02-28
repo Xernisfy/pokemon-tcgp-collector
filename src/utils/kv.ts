@@ -3,11 +3,12 @@ import { DbExport } from "utils/types.ts";
 export const db = await Deno.openKv(
   import.meta.dirname + "/../../db/db.sqlite",
 );
-addEventListener("unload", () => db.close());
-Deno.addSignalListener("SIGINT", () => {
-  db.close();
-  Deno.exit(0);
-});
+(["SIGINT", "SIGTERM"] as Deno.Signal[]).forEach((signal) =>
+  Deno.addSignalListener(signal, () => {
+    db.close();
+    Deno.exit(0);
+  })
+);
 
 export enum Prefix {
   users = "users",
