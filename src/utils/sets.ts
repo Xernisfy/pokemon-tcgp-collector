@@ -31,7 +31,7 @@ export const sets = [
   },
   {
     id: "PROMO-A",
-    cards: { normal: 41, secret: 0 },
+    cards: { normal: 49, secret: 0 },
     link: "promo-a",
     name: "PROMO-A",
     packs: [],

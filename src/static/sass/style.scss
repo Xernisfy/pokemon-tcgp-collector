@@ -117,10 +117,10 @@ html {
             background: hsl(20, 100%, 50%);
           }
           &[data-pack="A1a"] > div {
-            background: hsl(150, 100%, 50%);
+            background: hsl(150, 50%, 50%);
           }
           &[data-pack="A2"] > div {
-            background: hsl(280, 100%, 50%);
+            background: hsl(0, 0%, 50%);
           }
           &[data-pack="A2-dialga"] > div {
             background: hsl(220, 100%, 50%);
@@ -128,11 +128,14 @@ html {
           &[data-pack="A2-palkia"] > div {
             background: hsl(290, 100%, 50%);
           }
+          &[data-pack="A2a"] > div {
+            background: hsl(40, 100%, 50%);
+          }
           &[data-pack="PROMO-A"] > div {
             background: hsl(0, 0%, 50%);
           }
           &[data-pack="rest"] > div {
-            background: hsl(0, 0%, 50%);
+            background: hsl(0, 0%, 75%);
           }
         }
       }
