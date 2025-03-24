@@ -9,6 +9,7 @@ import { SelectPack } from "../islands/selectPack.tsx";
 import { SelectRarity } from "../islands/selectRarity.tsx";
 import { SelectSet } from "../islands/selectSet.tsx";
 import { SelectUser } from "../islands/selectUser.tsx";
+import { Rarity } from "utils/types.ts";
 
 export const handler: Handlers<PreloadData> = {
   async GET(_req, ctx) {
@@ -24,7 +25,11 @@ export const handler: Handlers<PreloadData> = {
     for await (const entry of db.list<string>({ prefix: [Prefix.packs] })) {
       packs[entry.key.slice(1).join("/")] = entry.value;
     }
-    return ctx.render({ users, cards, packs });
+    const rarities: PreloadData["rarities"] = {};
+    for await (const entry of db.list<Rarity>({ prefix: [Prefix.rarity] })) {
+      rarities[entry.key.slice(1).join("/")] = entry.value;
+    }
+    return ctx.render({ users, cards, packs, rarities });
   },
 };
 
@@ -32,6 +37,7 @@ interface PreloadData {
   users: string[];
   cards: Record<string, number>;
   packs: Record<string, string>;
+  rarities: Record<string, Rarity>;
 }
 
 export default function ({ data }: { data: PreloadData }) {
@@ -49,7 +55,11 @@ export default function ({ data }: { data: PreloadData }) {
         </div>
         <HeaderToggle />
       </div>
-      <Collection cards={data.cards} packs={data.packs} />
+      <Collection
+        cards={data.cards}
+        packs={data.packs}
+        rarities={data.rarities}
+      />
     </>
   );
 }

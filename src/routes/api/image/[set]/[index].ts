@@ -3,7 +3,7 @@ import { DOMParser } from "jsr:@b-fuze/deno-dom";
 import { ensureDirSync, existsSync } from "jsr:@std/fs";
 import { contentTypeHeader } from "utils/contentTypeHeader.ts";
 import { sets } from "utils/sets.ts";
-import { Set } from "utils/types.ts";
+import { CardSet } from "utils/types.ts";
 
 const cacheDir = import.meta.dirname + "/../../../../../.cache/";
 const parseDom = ((p) => p.parseFromString.bind(p))(new DOMParser());
@@ -42,7 +42,7 @@ export const handler: Handlers = {
 };
 
 async function getGermanCard(
-  set: Set,
+  set: CardSet,
   index: number,
   cacheFile: string,
 ): Promise<Response | never> {
@@ -105,7 +105,7 @@ async function getGermanCard(
 }
 
 async function getEnglishCard(
-  set: Set,
+  set: CardSet,
   index: number,
 ): Promise<Response | never> {
   const image = await fetch(

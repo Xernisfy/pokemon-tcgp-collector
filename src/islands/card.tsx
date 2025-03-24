@@ -1,10 +1,11 @@
-import { isDuplicate, sets } from "utils/sets.ts";
+import { isDuplicate } from "utils/sets.ts";
 import {
   filterObtained,
   filterPack,
   filterRarity,
   filterSet,
   packs,
+  rarities,
   user,
   userCards,
 } from "utils/signals.ts";
@@ -21,6 +22,7 @@ export function Card(props: CardProps) {
   const userCardsKey = user.value + "/" + key;
   const currentCount = userCards.value[userCardsKey] || 0;
   const currentPack = packs.value[key];
+  const currentRarity = rarities.value[key];
   function update() {
     fetch(`/api/count/${user.value}/${key}`, {
       method: "PUT",
@@ -35,14 +37,9 @@ export function Card(props: CardProps) {
     if (filterPack.value !== "all" && filterPack.value !== currentPack) {
       return true;
     }
-    if (
-      filterRarity.value === "normal" &&
-      props.index >= sets.find((s) => s.id === props.setId)!.cards.normal
-    ) return true;
-    if (
-      filterRarity.value === "secret" &&
-      props.index < sets.find((s) => s.id === props.setId)!.cards.normal
-    ) return true;
+    if (filterRarity.value !== "all" && filterRarity.value !== currentRarity) {
+      return true;
+    }
     if (filterObtained.value === "obtained" && currentCount === 0) return true;
     if (filterObtained.value === "unobtained" && currentCount > 0) return true;
     if (filterObtained.value === "tradable") {

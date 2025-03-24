@@ -1,7 +1,6 @@
 import { filterRarity } from "utils/signals.ts";
 import { Rarity } from "utils/types.ts";
-
-export const rarities = [["normal", "Normal"], ["secret", "Selten"]] as const;
+import { rarityValues } from "utils/const.ts";
 
 export function SelectRarity() {
   return (
@@ -13,8 +12,8 @@ export function SelectRarity() {
         onInput={(e) => filterRarity.value = e.currentTarget.value as Rarity}
       >
         <option value="all">Alle</option>
-        {rarities.map(([option, text]) => (
-          <option key={option} value={option}>{text}</option>
+        {rarityValues.map((option) => (
+          <option key={option} value={option}>{option}</option>
         ))}
       </select>
     </>

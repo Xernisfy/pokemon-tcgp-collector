@@ -19,7 +19,9 @@ addEventListener("unload", () => {
 export enum Prefix {
   users = "users",
   count = "count",
+  sets = "sets",
   packs = "packs",
+  rarity = "rarity",
 }
 
 export async function dbExport(): Promise<DbExport> {

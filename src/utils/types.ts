@@ -1,7 +1,7 @@
+import { rarityValues } from "utils/const.ts";
 import { sets } from "utils/sets.ts";
-import { rarities } from "../islands/selectRarity.tsx";
 
-export type Set = {
+export type CardSet = {
   id: string;
   name: string;
   link: string;
@@ -11,6 +11,6 @@ export type Set = {
 
 export type SetId = typeof sets[number]["id"];
 export type PackName = typeof sets[number]["packs"][number];
-export type Rarity = typeof rarities[number][0];
+export type Rarity = typeof rarityValues[number];
 
 export type DbExport = Record<string, { key: Deno.KvKey; value: unknown }[]>;

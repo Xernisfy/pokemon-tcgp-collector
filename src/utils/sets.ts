@@ -1,4 +1,4 @@
-import { Set } from "utils/types.ts";
+import { CardSet } from "utils/types.ts";
 
 export const sets = [
   {
@@ -36,7 +36,7 @@ export const sets = [
     name: "PROMO-A",
     packs: [],
   },
-] as const satisfies Set[];
+] as const satisfies CardSet[];
 
 const duplicateList = [
   ["A1/217", "A1a/62"],

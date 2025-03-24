@@ -1,15 +1,18 @@
 import { sets } from "utils/sets.ts";
-import { packs, userCards } from "utils/signals.ts";
+import { packs, rarities, userCards } from "utils/signals.ts";
+import { Rarity } from "utils/types.ts";
 import { Card } from "./card.tsx";
 
 interface CollectionProps {
   cards: Record<string, number>;
   packs: Record<string, string>;
+  rarities: Record<string, Rarity>;
 }
 
 export function Collection(props: CollectionProps) {
   userCards.value = props.cards;
   packs.value = props.packs;
+  rarities.value = props.rarities;
   return (
     <div id="cards">
       {sets.reduce((p, c) => {

@@ -5,6 +5,7 @@ import { PackName, Rarity, SetId } from "utils/types.ts";
 export const user = signal<string>();
 export const userCards = signal<Record<string, number>>({});
 export const packs = signal<Record<string, string>>({});
+export const rarities = signal<Record<string, Rarity>>({});
 
 // filters
 export const filterSet = signal<SetId | "all">("all");
