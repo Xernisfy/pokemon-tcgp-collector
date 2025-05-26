@@ -1,6 +1,6 @@
+import { rarityValues } from "utils/const.ts";
 import { filterRarity } from "utils/signals.ts";
 import { Rarity } from "utils/types.ts";
-import { rarityValues } from "utils/const.ts";
 
 export function SelectRarity() {
   return (
@@ -13,7 +13,13 @@ export function SelectRarity() {
       >
         <option value="all">Alle</option>
         {rarityValues.map((option) => (
-          <option key={option} value={option}>{option}</option>
+          <option
+            key={option}
+            value={option}
+            class={option.startsWith("group-") ? "group" : undefined}
+          >
+            {option.replace("group-", "")}
+          </option>
         ))}
       </select>
     </>

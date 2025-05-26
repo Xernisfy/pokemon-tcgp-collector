@@ -9,6 +9,7 @@ import {
   user,
   userCards,
 } from "utils/signals.ts";
+import { Rarity } from "utils/types.ts";
 import { Pack } from "./pack.tsx";
 
 interface CardProps {
@@ -37,8 +38,22 @@ export function Card(props: CardProps) {
     if (filterPack.value !== "all" && filterPack.value !== currentPack) {
       return true;
     }
-    if (filterRarity.value !== "all" && filterRarity.value !== currentRarity) {
-      return true;
+    if (
+      filterRarity.value !== "all" && filterRarity.value !== currentRarity
+    ) {
+      if (filterRarity.value === "group-Normal") {
+        if (
+          !(["🔷", "🔷🔷", "🔷🔷🔷", "🔷🔷🔷🔷"] as Rarity[]).includes(
+            currentRarity,
+          )
+        ) return true;
+      } else if (filterRarity.value === "group-Geheim") {
+        if (
+          !(["⭐", "⭐⭐", "⭐⭐⭐", "👑", "✨", "✨✨"] as Rarity[]).includes(
+            currentRarity,
+          )
+        ) return true;
+      } else return true;
     }
     if (filterObtained.value === "obtained" && currentCount === 0) return true;
     if (filterObtained.value === "unobtained" && currentCount > 0) return true;

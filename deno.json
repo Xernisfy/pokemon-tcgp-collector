@@ -12,7 +12,9 @@
   },
   "lock": false,
   "tasks": {
-    "dev": "deno run -A --watch ./src/main.ts"
+    "dev": "deno run -A --watch ./src/main.ts",
+    "update": "deno run -A scripts/updatePackData.ts",
+    "export": "deno run -A scripts/dbExport.ts"
   },
   "unstable": ["kv"]
 }

@@ -1,8 +1,8 @@
 import { sets } from "utils/sets.ts";
 import { filterSet, packs, user, userCards } from "utils/signals.ts";
-import { PackName, Rarity, SetId } from "utils/types.ts";
+import { PackName, SetId } from "utils/types.ts";
 
-type RarityDistr = Record<Rarity, [number, number]>;
+type RarityDistr = Record<"normal" | "secret", [number, number]>;
 
 interface ProgressBarProps {
   distr: RarityDistr;
@@ -15,21 +15,13 @@ function ProgressBar(props: ProgressBarProps) {
   return (
     <div title={props.pack}>
       <div class="progress-bar" data-pack={props.pack}>
-        <div
-          style={`width: ${nc / nm * 100}%;`}
-        >
-          {nc}/{nm}
+        <div style={`width: ${nc / nm * 100}%;`}>
+          <span>{nc}/{nm}</span>
         </div>
       </div>
-      <div
-        class="progress-bar secret"
-        data-pack={props.pack}
-        hidden={sm === 0}
-      >
-        <div
-          style={`width: ${sc / sm * 100}%;`}
-        >
-          {sc}/{sm}
+      <div class="progress-bar secret" data-pack={props.pack} hidden={sm === 0}>
+        <div style={`width: ${sc / sm * 100}%;`}>
+          <span>{sc}/{sm}</span>
         </div>
       </div>
     </div>
@@ -90,31 +82,30 @@ export function PackProgress() {
     <div id="packs">
       {sets.map((set) => (
         <div
-          class={filterSet.value !== set.id ? "display-none" : "display-flex"}
+          class={filterSet.value !== "all" && filterSet.value !== set.id
+            ? "display-none"
+            : "display-flex"}
         >
           <div class="pack">
             <ProgressBar distr={cardsPerPack[set.id]} pack={set.id} />
             <div class="display-flex">
               {((packs) => packs.length ? [...packs, "rest" as const] : packs)(
                 set.packs,
-              )
-                .map((
-                  pack,
-                ) => (
-                  <div
-                    style={`flex: ${
-                      (({ normal, secret }) => normal[1] + secret[1])(
-                        cardsPerPack[set.id].packs[pack],
-                      ) / (({ normal, secret }) =>
-                        normal[1] + secret[1])(cardsPerPack[set.id])
-                    };`}
-                  >
-                    <ProgressBar
-                      distr={cardsPerPack[set.id].packs[pack]}
-                      pack={set.id + "-" + pack}
-                    />
-                  </div>
-                ))}
+              ).map((pack) => (
+                <div
+                  style={`flex: ${
+                    (({ normal, secret }) => normal[1] + secret[1])(
+                      cardsPerPack[set.id].packs[pack],
+                    ) / (({ normal, secret }) =>
+                      normal[1] + secret[1])(cardsPerPack[set.id])
+                  };`}
+                >
+                  <ProgressBar
+                    distr={cardsPerPack[set.id].packs[pack]}
+                    pack={set.id + "-" + pack}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

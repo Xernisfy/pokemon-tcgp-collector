@@ -75,6 +75,10 @@ html {
       font-size: 1rem;
       margin-right: 1rem;
       transition: all 0.2s;
+      .group {
+        font-weight: bold;
+        font-style: italic;
+      }
     }
     #packs {
       .set-name {
@@ -131,6 +135,9 @@ html {
           &[data-pack="A2a"] > div {
             background: hsl(40, 100%, 50%);
           }
+          &[data-pack="A2b"] > div {
+            background: hsla(0, 0%, 75%);
+          }
           &[data-pack="PROMO-A"] > div {
             background: hsl(0, 0%, 50%);
           }
@@ -157,6 +164,8 @@ html {
     border: 1px solid #ddd;
     border-radius: 8px;
     cursor: pointer;
+    max-width: 256px;
+    min-height: 200px;
     overflow: hidden;
     position: relative;
     text-align: center;

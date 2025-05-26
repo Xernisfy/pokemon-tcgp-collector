@@ -1,4 +1,5 @@
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
+import { fetchCached } from "utils/fetchCached.ts";
 import { db, Prefix } from "utils/kv.ts";
 import { sets } from "utils/sets.ts";
 
@@ -18,8 +19,24 @@ const parseDom =
     new DOMParser(),
   );
 
+const rarityMap: Record<string, string> = {
+  "diamond1": "🔷",
+  "diamond2": "🔷🔷",
+  "diamond3": "🔷🔷🔷",
+  "diamond4": "🔷🔷🔷🔷",
+  "star1": "⭐",
+  "star2": "⭐⭐",
+  "star3": "⭐⭐⭐",
+  "shiny1": "🌟",
+  "shiny2": "🌟🌟",
+  "crown": "👑",
+  "promo": "PROMO",
+};
+
 for (const set of sets) {
-  const response = await fetch(`https://serebii.net/tcgpocket/${set.link}`);
+  const response = await fetchCached(
+    `https://serebii.net/tcgpocket/${set.link}`,
+  );
   const document = parseDom(await response.text());
   [...document.querySelectorAll(
     "table.dextable > tbody > tr:not(:first-child)",
@@ -28,37 +45,9 @@ for (const set of sets) {
     if (cardCol) {
       const rarityImage = cardCol.querySelector("img")?.getAttribute("src")
         ?.match(/([^\/]*?)\./)?.[1];
-      switch (rarityImage) {
-        case "diamond1":
-          db.set([Prefix.rarity, set.id, i], "🔹");
-          break;
-        case "diamond2":
-          db.set([Prefix.rarity, set.id, i], "🔹🔹");
-          break;
-        case "diamond3":
-          db.set([Prefix.rarity, set.id, i], "🔹🔹🔹");
-          break;
-        case "diamond4":
-          db.set([Prefix.rarity, set.id, i], "🔹🔹🔹🔹");
-          break;
-        case "star1":
-          db.set([Prefix.rarity, set.id, i], "⭐");
-          break;
-        case "star2":
-          db.set([Prefix.rarity, set.id, i], "⭐⭐");
-          break;
-        case "star3":
-          db.set([Prefix.rarity, set.id, i], "⭐⭐⭐");
-          break;
-        case "crown":
-          db.set([Prefix.rarity, set.id, i], "👑");
-          break;
-        case "promo":
-          db.set([Prefix.rarity, set.id, i], "PROMO");
-          break;
-        default:
-          console.log(rarityImage);
-      }
+      if (rarityImage && rarityImage in rarityMap) {
+        db.set([Prefix.rarity, set.id, i], rarityMap[rarityImage]);
+      } else throw new Error(`unknown rarity "${rarityImage}"`);
     }
     if (set.packs.length > 1) {
       const packCol = row.querySelector("td:nth-child(5)");

@@ -30,8 +30,22 @@ export const sets = [
     packs: [],
   },
   {
+    id: "A2b",
+    cards: { normal: 72, secret: 39 },
+    link: "shiningrevelry",
+    name: "Glänzendes Festival",
+    packs: [],
+  },
+  {
+    id: "A3",
+    cards: { normal: 155, secret: 84 },
+    link: "celestialguardians",
+    name: "Hüter des Firmaments",
+    packs: ["solgaleo", "lunala"],
+  },
+  {
     id: "PROMO-A",
-    cards: { normal: 49, secret: 0 },
+    cards: { normal: 59, secret: 0 },
     link: "promo-a",
     name: "PROMO-A",
     packs: [],
